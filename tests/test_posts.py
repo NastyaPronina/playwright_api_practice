@@ -81,6 +81,6 @@ def test_create_post_with_faker(post_service, faker):
 
     result = response.json()
     assert result["title"] == payload["title"]
-    print(f"\n Сгенерированный заголовок: {payload["title"]}")
+    print(f"\n Сгенерированный заголовок: {payload['title']}")
 
 
