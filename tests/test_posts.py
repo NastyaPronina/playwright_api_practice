@@ -56,4 +56,16 @@ def test_post_schema_validation(post_service):
     validate(instance=response.json(), schema=POST_SCHEMA)
     print("\n Схема ответа валидна!")
 
+@allure.title("Негативные тесты для создания поста")
+@pytest.mark.parametrize("invalid_payload, expected_status", [
+    ({"title": 12345, "body": "text", "userId": 1}, 201), # Проверка, что можно записать числа вместо букв
+    ({"body": "no title"}, 201),                          # Проверка на отсутствие обязательного поля
+    ({}, 201)                                             # Пустой объект
+])
+def test_create_post_negative(post_service, invalid_payload, expected_status):
+    response = post_service.create_post(invalid_payload)
+    # В реальных проектах на плохие данные сервер должен отвечать статус кодом 400 (Bad Requests)
+    assert response.status == expected_status
+    print(f"\n Отправлено: {invalid_payload} | Статус: {response.status}")    
+
 
