@@ -1,7 +1,7 @@
 import pytest
 from services.post_service import PostService
 from services.users_service import UsersService
-
+from faker import Faker
 
 @pytest.fixture(scope="session")
 def api_request_context(playwright):
@@ -20,3 +20,7 @@ def post_service(api_request_context):
 @pytest.fixture
 def users_service(api_request_context):
     return UsersService(api_request_context)
+
+@pytest.fixture(scope="session")
+def faker():
+    return Faker()

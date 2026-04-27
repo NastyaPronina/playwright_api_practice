@@ -68,4 +68,19 @@ def test_create_post_negative(post_service, invalid_payload, expected_status):
     assert response.status == expected_status
     print(f"\n Отправлено: {invalid_payload} | Статус: {response.status}")    
 
+def test_create_post_with_faker(post_service, faker):
+    # Генерация случайных данных
+    payload = {
+        "title": faker.sentence(),  # Случайное предложение
+        "body": faker.paragraph(),  # Случайный абзац текста
+        "userId": faker.random_int(min=1, max=10) # Случайное ID юзера от 1 до 10
+    }
+
+    response = post_service.create_post(payload)
+    assert response.status == 201
+
+    result = response.json()
+    assert result["title"] == payload["title"]
+    print(f"\n Сгенерированный заголовок: {payload["title"]}")
+
 
