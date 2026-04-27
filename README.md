@@ -32,7 +32,6 @@
 3. Установите зависимости:
     ```bash
     pip install -r requirements.txt
-    playwright install
 
 4. Запустите тесты:
     ```bash
