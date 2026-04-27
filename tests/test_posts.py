@@ -68,6 +68,7 @@ def test_create_post_negative(post_service, invalid_payload, expected_status):
     assert response.status == expected_status
     print(f"\n Отправлено: {invalid_payload} | Статус: {response.status}")    
 
+@allure.title("Создание поста с использованием генерации случайных данных")
 def test_create_post_with_faker(post_service, faker):
     # Генерация случайных данных
     payload = {
